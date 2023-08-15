@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   toke_it_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokhalil <mokhalil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:11:20 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/08/05 22:09:38 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/08/13 18:05:37 by mokhalil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	dqbp(t_tokenz *m, char *str)
 			m->array[m->j] = '3';
 		else if (str[m->i] == '$')
 			m->array[m->j] = '-';
+		else if (str[m->i] == '\'')
+			m->array[m->j] = '0';
 		m->i++;
 		m->j++;
 	}
@@ -51,6 +53,8 @@ void	sqbp(t_tokenz *m, char *str)
 			m->array[m->j] = '0';
 		else if (str[m->i] == '$')
 			m->array[m->j] = '-';
+		else if (str[m->i] == '"')
+			m->array[m->j] = '0';
 		m->i++;
 		m->j++;
 	}

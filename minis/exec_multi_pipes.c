@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int	heredoc_in_multiple_pipe(t_commandes **c, char *list, t_exeec *z)
+int	heredoc_in_multiple_pipe(t_commandes **c, char *list, t_exeec *z, char **evir)
 {
 	z->pid_fd = my_malloc(sizeof(int) * z->s);
 	z->list_sp = ft_split(list, '6');
@@ -23,7 +23,7 @@ int	heredoc_in_multiple_pipe(t_commandes **c, char *list, t_exeec *z)
 	{
 		while (z->list_sp[z->l->k])
 		{
-			if (heredoc(&z->cmd, z->l, z->list_sp[z->l->k]) == -1)
+			if (heredoc(&z->cmd, z->l, z->list_sp[z->l->k], evir) == -1)
 			{
 				close(z->l->pipe_fd[1]);
 				break ;

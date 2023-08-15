@@ -49,10 +49,8 @@ int	loop_through_int(char *s)
 void	t_exit(char **c)
 {
 	char	**s;
-	int		i;
 
 	s = c;
-	i = 0;
 	if (!c[1])
 		exit(0);
 	if (s[2])

@@ -1,8 +1,8 @@
 NAME = Minishell
-CC = cc
+CC = gcc-11
 RM = rm -f
-LIBS = -lreadline -L/Users/iszitoun/goinfre/Homebrew/Cellar/readline/8.2.1/lib
-CFLAGS = -Wall -Wextra -Werror -I /Users/iszitoun/goinfre/Homebrew/Cellar/readline/8.2.1/include
+LIBS = -L ~/Downloads/readline-8.2/ -lreadline -lcurses
+CFLAGS = -Wall -Wextra -Werror -I ~/Downloads/readline-8.2/ 
 src = main.c\
 		utils.c\
 		parssing.c\
@@ -34,6 +34,8 @@ src = main.c\
 		./minis/exec.c\
 		./minis/pwd.c\
 		./minis/export.c\
+		./minis/export_utils.c\
+		./minis/export_utils2.c\
 		./minis/echo.c\
 		./minis/cd.c\
 		./minis/ft_strdup.c\
@@ -45,7 +47,17 @@ src = main.c\
 		./minis/gett_ev.c\
 		./minis/exit.c\
 		./minis/ft_atoi.c\
-		./minis/herdoc_utils.c\
+		./minis/signal.c\
+		./minis/cd_utils.c\
+		./minis/expand_heredoc.c\
+		./minis/singal_command.c\
+		./minis/redirection.c\
+		./minis/heredoc_help.c\
+		./minis/heredoc.c\
+		./minis/exec_multi_pipes.c\
+		./minis/exec_multi_pipes2.c\
+		./minis/files_utils.c\
+		./minis/pipes_utils.c\
 		./minis/multiple_pipe_utils.c\
 
 OBJECTS = ${src:.c=.o}
@@ -53,7 +65,7 @@ OBJECTS = ${src:.c=.o}
 all	:	$(NAME)
 
 $(NAME):	$(OBJECTS)
-	$(CC) $(CFLAGS) ${LIBS} $(OBJECTS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME) ${LIBS}
 		
 clean :
 	$(RM) $(OBJECTS)

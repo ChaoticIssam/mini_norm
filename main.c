@@ -3,21 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokhalil <mokhalil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:58:37 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/08/13 05:45:28 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 01:20:12 by mokhalil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "readline.h"
 
 void	ft_read_line(t_main *main)
 {
 	printf("\033[0;31m");
+	g_g.readline = 1;
 	main->line = readline("Minishell$ ");
-	printf("read_line ->%s\n", main->line);
+	g_g.readline = 0;
 	printf("\033[0m");
+	tcsetattr(0, TCSANOW, &main->term2);
 	add_history(main->line);
 	if (main->line == NULL || !ft_strncmp(main->line, "exit"))
 		exit(0);
@@ -65,25 +68,28 @@ void	print_after_pipe(t_main *main)
 int	main(int ac, char **av, char **env)
 {
 	t_main	*main;
-	envar	*ev;
+	t_envar	*ev;
 
 	(void)ac;
 	(void)av;
 	ev = 0;
 	ev = get_env(ev, env);
+
 	main = my_malloc(sizeof(t_main));
 	int_main(main);
+	signal_handler();
 	while (1)
 	{
-		tcgetattr(0, &main->term);
 		int_sig_main(main);
-		signal(SIGINT, siginthandler);
 		ft_read_line(main);
-		if (*return_commande(main->list, main->line, 1, 0)
-			|| *return_file(main->list, main->line, 1, main->tmp))
+		if (*main->list && *main->line && (*return_commande(main->list, main->line, 1, 0)
+			|| *return_file(main->list, main->line, 1, main->tmp)))
+		{
 			int_main_before(main, ev);
+			// print_before_pipe(main);
+		}
 		do_after_pipe(main, ev);
-		multiple_pipe(&main->m, &ev, main->list);
+		multiple_pipe(&main->m, &ev, main->list, &main->senv, env);
 		if (main->line)
 			free(main->line);
 		re_vars(main);

@@ -6,24 +6,24 @@
 /*   By: mokhalil <mokhalil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 01:55:52 by mokhalil          #+#    #+#             */
-/*   Updated: 2023/08/14 03:08:26 by mokhalil         ###   ########.fr       */
+/*   Updated: 2023/08/14 05:58:47 by mokhalil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	init_hered_var(t_herdc *a, t_commandes **c, t_varint *l, char *list)
-{
-	a->m = -1;
-	a->k = NULL;
-	a->pid = my_malloc (sizeof(int) * l->size);
-	l->tmp = (*c);
-	a->i = 0;
-	l->x = 0;
-	a->j = 0;
-	a->o = 0;
-	a->in_file = get_first_infile(l->tmp->files, list);
-}
+// void	init_hered_var(t_herdc *a, t_commandes **c, t_varint *l, char *list)
+// {
+// 	a->m = -1;
+// 	a->k = NULL;
+// 	a->pid = my_malloc (sizeof(int) * l->size);
+// 	l->tmp = (*c);
+// 	a->i = 0;
+// 	l->x = 0;
+// 	a->j = 0;
+// 	a->o = 0;
+// 	a->in_file = get_first_infile(l->tmp->files, list);
+// }
 
 void	get_last_inf(char *list, int *flag, int *i, int *counter)
 {
@@ -35,16 +35,16 @@ void	get_last_inf(char *list, int *flag, int *i, int *counter)
 	else if (list[*i] == '4')
 	{
 		*flag = 0;
-		*i++;
+		*i += 1;
 	}
 	else if (list[*i] == '6' && *flag)
 	{
-		*counter++;
-		*i++;
+		*counter += 1;
+		*i +=1;
 		*flag = 0;
 	}
 	else
-		*i++;
+		*i += 1;
 }
 
 int	count_last_inf_heredoc(char *list)

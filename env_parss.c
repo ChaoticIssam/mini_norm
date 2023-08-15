@@ -6,7 +6,7 @@
 /*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:18:51 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/08/13 18:46:26 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/07/22 08:43:43 by iszitoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,14 @@ int	env_len(t_commandes *m)
 	return (0);
 }
 
-char	*var_gett(envar *env)
+char	*var_get(t_envar *env)
 {
 	int		j;
 	char	*envv;
 
-	envv = my_malloc(sizeof(char) * 100);
+	envv = malloc(sizeof(char) * 1000);
 	j = 0;
+	printf("...........>>>>>(%s)\n", env->value);
 	while (env->value[j])
 	{
 		if (env->value[j] == '=')
@@ -56,13 +57,13 @@ char	*var_gett(envar *env)
 	return (0);
 }
 
-char	*get_path(envar *env)
+char	*get_path(t_envar *env)
 {
 	int		j;
 	int		x;
 	char	*envr;
 
-	envr = my_malloc(sizeof(char) * 100);
+	envr = malloc(sizeof(char) * 1000);
 	j = 0;
 	x = 0;
 	while (env->value[j])
@@ -84,19 +85,19 @@ char	*get_path(envar *env)
 	return (0);
 }
 
-char	*fill_path(envar *env, t_env *s)
+char	*fill_path(t_envar *env, t_env *s)
 {
 	int		j;
 	char	*path;
 
 	j = 0;
-	path = my_malloc(sizeof(char) * 100);
+	path = malloc(sizeof(char) * 1000);
 	while (env->value[j] && env->value[j] != '=')
 		j++;
 	j++;
-	while (env->next)
+	while (env)
 	{
-		if (!ft_strncmp(s->var, var_gett(env)))
+		if (!ft_strncmp(s->var, var_get(env)))
 		{
 			path = get_path(env);
 			return (path);

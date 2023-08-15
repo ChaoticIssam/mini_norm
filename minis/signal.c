@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include "readline.h"
 
 static void	control_c(int sig)
 {

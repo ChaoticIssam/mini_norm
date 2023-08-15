@@ -12,12 +12,10 @@
 
 #include "../minishell.h"
 
-int	check_for_n(char **input, int *i, int *isoption, int *flprnt)
+int	check_for_n(char **input, int *isoption, int *flprnt)
 {
 	int	j;
-	int	k;
 
-	k = *i;
 	j = 0;
 	if (input[0][0] == '-' && input[0][j + 1] == 'n')
 	{
@@ -46,7 +44,7 @@ void	t_echo(char **input)
 	flprnt = 0;
 	i = 0;
 	isoption = 0;
-	check_for_n(input, &i, &isoption, &flprnt);
+	check_for_n(input, &isoption, &flprnt);
 	if (isoption)
 		i = 1;
 	j = 0;

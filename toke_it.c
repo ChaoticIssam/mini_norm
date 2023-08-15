@@ -66,14 +66,14 @@ void	var_def(t_tokenz *m, char *str, int i, int j)
 	}
 	m->j = 0;
 	m->count = 0;
-	m->array = calloc(sizeof(char), ft_strlen(str) + 1);
+	m->array = my_malloc(sizeof(char) * ft_strlen(str) + 1);
 }
 
 char	*toknz_list(char *str, int i, int j)
 {
 	t_tokenz	*m;
 
-	m = malloc(sizeof(t_tokenz));
+	m = my_malloc(sizeof(t_tokenz));
 	var_def(m, str, i, j);
 	while (m->i <= ft_strlen(str) && str[m->i])
 	{

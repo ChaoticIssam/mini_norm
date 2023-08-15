@@ -6,7 +6,7 @@
 /*   By: mokhalil <mokhalil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 01:50:43 by mokhalil          #+#    #+#             */
-/*   Updated: 2023/08/14 03:08:32 by mokhalil         ###   ########.fr       */
+/*   Updated: 2023/08/14 06:06:27 by mokhalil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,16 @@ int	heredoc_append(t_redirect *d, t_varint *l, char **files, char *list)
 		return (1);
 	}
 	return (0);
+}
+
+void	init_redirection(t_redirect *d, t_varint *l, char**files, char *list)
+{
+	d->fd = -1;
+	d->i = 0;
+	l->x = 0;
+	l->d = 0;
+	d->in_file = get_first_infile(files, list);
+	d->out_file = get_first_outfile(files, list);
 }
 
 void	redirection(t_varint *l, char **files, char *list)

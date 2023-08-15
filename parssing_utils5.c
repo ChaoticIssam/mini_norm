@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parssing_utils5.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokhalil <mokhalil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:04:58 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/08/13 08:50:14 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/08/13 06:45:28 by mokhalil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_count_vars(char *list, t_count *c)
 	c->len = ft_strlen(list);
 }
 
-char	*fill_var(t_commandes *tmp, envar *env, int i, int j)
+char	*fill_var(t_commandes *tmp, t_envar *env, int i, int j)
 {
 	char	*var;
 	int		x;

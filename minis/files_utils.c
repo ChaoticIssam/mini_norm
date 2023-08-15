@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokhalil <mokhalil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 01:54:37 by mokhalil          #+#    #+#             */
-/*   Updated: 2023/08/14 05:23:32 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 05:57:34 by mokhalil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,60 +32,46 @@ int	check_ofiles(char *list, int *i, int *j)
 	return (f);
 }
 
-int	check_ofiles(char *list, int *i, int *j)
+int	check_ifiles(char *list, t_filino *f, char **files)
 {
-	if (list[*i] == '8' && list[*i + 1] && list[*i + 1] == '8')
+	int	fs;
+
+	fs = 0;
+	if (list[f->i] == '8' && list[f->i + 1] && list[f->i + 1] == '8')
 	{
-		j++;
-		if (in_file)
-			free(in_file);
-		printf("file j %s \n", files[*j]);
-		in_file = ft_strdup(files[*j]);
-		*i += 2;
+		f->j++;
+		if (f->in_file)
+			free(f->in_file);
+		f->in_file = ft_strdup(files[f->j]);
+		f->i += 2;
+		fs = 1;
 	}
-	else if (list[i] == '4')
+	else if (list[f->i] == '4')
 	{
-		j++;
-		if (in_file)
-			free(in_file);
-		in_file = ft_strdup(files[j]);
-		i++;
+		f->j++;
+		if (f->in_file)
+			free(f->in_file);
+		f->in_file = ft_strdup(files[f->j]);
+		f->i++;
+		fs = 1;
 	}
+	return (fs);
 }
+
 char	*get_first_infile(char **files, char *list)
 {
-	int		i;
-	int		j;
-	char	*in_file;
+	t_filino	f;
 
-	in_file = NULL;
-	j = -1;
-	i = 0;
-	while (list[i])
+	f.in_file = NULL;
+	f.j = -1;
+	f.i = 0;
+	while (list[f.i])
 	{
-		if (!check_ofiles(list, &i, &j))
-			;
-		if (list[i] == '8' && list[i + 1] && list[i + 1] == '8')
-		{
-			j++;
-			if (in_file)
-				free(in_file);
-			printf("file j %s \n", files[j]);
-			in_file = ft_strdup(files[j]);
-			i += 2;
-		}
-		else if (list[i] == '4')
-		{
-			j++;
-			if (in_file)
-				free(in_file);
-			in_file = ft_strdup(files[j]);
-			i++;
-		}
-		else
-			i++;
+		check_ofiles(list, &f.i, &f.j);
+		if (!check_ifiles(list, &f, files))
+			f.i++;
 	}
-	return (in_file);
+	return (f.in_file);
 }
 
 char	*get_first_outfile(char **files, char *list)

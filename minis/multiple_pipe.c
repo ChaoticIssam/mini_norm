@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multiple_pipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokhalil <mokhalil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 03:00:00 by mokhalil          #+#    #+#             */
-/*   Updated: 2023/08/14 05:46:44 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 06:28:25 by mokhalil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,28 +51,32 @@ void	set_pipe(t_exeec *z, t_envar **ev)
 			return ;
 		}
 		else if (z->pid_fd[z->i] == 0 && z->cmd->commande[0])
-			child_process_in_pipe(&z, ev);
-		parent_process_in_pipe(&z);
+			child_process_in_pipe(z, ev);
+		parent_process_in_pipe(z);
 	}
 }
 
-void	multiple_pipe(t_commandes **c, t_envar **ev, char *list, t_env **eev)
+void	multiple_pipe(t_commandes **c, t_envar **ev, char *list, t_env **eev, char **envi)
 {
-	t_exeec	z;
+	t_exeec	*z;
 
+	z = my_malloc(sizeof(t_exeec));
+	multiple_pipe_init(z, c, list);
 	if (list[0])
 	{
-		z.l->s = *eev;
-		z.l->env = *ev;
-		multiple_pipe_init(&z, c, list, ev);
-		if (z.s == 1)
+		z->l->s = *eev;
+		z->l->env = *ev;
+		multiple_pipe_init(z, c, list);
+		if (z->s == 1)
 		{
-			single_node_exec(&z, list, ev);
+			single_node_exec(z, list, ev, envi);
 			return ;
 		}
-		else if (z.s > 1)
-			if (bigger_than_one(*list, **c, &z))
+		else if (z->s > 1)
+		{
+			if (bigger_than_one(list, c, z, ev, envi))
 				return ;
+		}
 	}
 	return ;
 }

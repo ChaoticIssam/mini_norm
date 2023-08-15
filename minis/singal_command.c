@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   singal_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokhalil <mokhalil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 01:02:37 by mokhalil          #+#    #+#             */
-/*   Updated: 2023/08/14 05:24:44 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 06:08:29 by mokhalil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	heredoc_single_command(t_exeec *z, char *list)
+int	heredoc_single_command(t_exeec *z, char *list, char **envir)
 {
 	z->stin = dup(0);
 	z->stout = dup(1);
 	if (z->cmd->files)
 	{
-		if (heredoc(&(z->cmd), z->l, list) == -1)
+		if (heredoc(&(z->cmd), z->l, list, envir) == -1)
 		{
 			close(z->l->pipe_fd[1]);
 			return (0);
@@ -91,9 +91,9 @@ void	single_command(t_exeec *z, t_envar **ev)
 	}
 }
 
-void	single_node_exec(t_exeec *z, char *list, t_envar **ev)
+void	single_node_exec(t_exeec *z, char *list, t_envar **ev, char **envir)
 {
-	if (!heredoc_single_command(z, list))
+	if (!heredoc_single_command(z, list, envir))
 		return ;
 	if (z->l->in != -1)
 	{
@@ -109,3 +109,4 @@ void	single_node_exec(t_exeec *z, char *list, t_envar **ev)
 		single_command(z, ev);
 	return ;
 }
+

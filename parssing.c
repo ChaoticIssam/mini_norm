@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parssing.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokhalil <mokhalil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:58:57 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/08/14 05:29:18 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/08/13 18:30:24 by mokhalil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	int_commande_var(t_commande *s, char *list, int bool)
 	s->j = 0;
 	s->end = 0;
 	s->ptr_num = count_ptr(list, bool);
-	s->commande = calloc(sizeof(char *), s->ptr_num + 2);
+	printf(">>>>>>>>>>>>>%d\n", s->ptr_num);
+	s->commande = my_malloc(sizeof(char *) * s->ptr_num + 2);
 	s->lock = 0;
 	s->lock1 = 1;
 	s->tmp = 0;
@@ -36,6 +37,7 @@ char	**return_commande(char *list, char *str, int bool, int c)
 		i = -1;
 	expand_erreur(list);
 	i = starting_parss(list, ++i, c);
+	printf("list >>>>>>>%s\n", list);
 	while (i + 1 <= ft_strlen(list) && list[i] && s->x <= count_ptr(list, bool)
 		&& list[i] != '6')
 	{
@@ -92,14 +94,27 @@ char	*quotes_quotes(char *str, char *tknz, int start)
 		if (tknz[q->i] == '0' || tknz[q->i] == '3')
 			q->i++;
 		if (tknz[q->i] == '-' && tknz[q->i + 1] == '3')
+		{
 			parss_quotes(str, tknz, q, tknz[q->i + 1]);
+			printf("double>>>>>>>>>%s\n", q->ptr);	
+		}
 		else if (tknz[q->i] == '-' && tknz[q->i + 1] == '0')
+		{
 			parss_quotes(str, tknz, q, tknz[q->i + 1]);
+			printf("single>>>>>>>>>%s\n", q->ptr);	
+		}
 		if (tknz[q->i] == '1' || tknz[q->i] == '-')
 			fill_between_q(str, q);
-		if (!tknz[q->i] || tknz[q->i] == '6' || ((tknz[q->i] == '3'
-					|| tknz[q->i] == '0') && !tknz[q->i + 1]))
-			return (q->ptr[q->j] = '\0', q->ptr);
+		if ((tknz[q->i] == '0' || tknz[q->i] == '3') && !tknz[q->i + 1])
+		{
+			q->ptr[q->j] = '\0';
+			return (q->ptr);
+		}
+		if (!tknz[q->i] || tknz[q->i] == '2' || tknz[q->i] == '6')
+		{
+			q->ptr[q->j] = '\0';
+			return (q->ptr);
+		}
 	}
 	if ((tknz[q->i] == '6' && q->i > q->last - 1) || (q->i == sec_q_rex(tknz,
 				sec_q(tknz) + 2) && q->last > 0))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_list.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokhalil <mokhalil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 05:23:13 by buyt_mkh7         #+#    #+#             */
-/*   Updated: 2023/08/14 05:34:25 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 03:09:02 by mokhalil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	ft_lstsize(t_envar *lst)
 	}
 	return (i);
 }
-
 int	ft_lst_size(t_commandes *lst)
 {
 	int			i;
@@ -78,7 +77,7 @@ int	ft_lst_size(t_commandes *lst)
 	return (i);
 }
 
-void	ft_lstdelone(t_envar *lst, void (*del)(void *))
+void	ft_lstdelone(t_envar *lst, void (*del)(void*))
 {
 	if (lst && del)
 	{

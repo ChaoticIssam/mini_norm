@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_ncmp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokhalil <mokhalil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 18:11:40 by buyt_mkh7         #+#    #+#             */
-/*   Updated: 2023/08/14 05:33:52 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/08/13 18:43:15 by mokhalil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strcmp(char *s1, char *s2)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
@@ -29,7 +29,7 @@ char	*ft_strchr(char *s, int c)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == (char)c)
+		if (s[i] == (char) c)
 			return ((char *)(s + i));
 		i++;
 	}

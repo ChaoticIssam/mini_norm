@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_parssing_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokhalil <mokhalil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:25:02 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/07/26 20:21:59 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/08/13 18:16:40 by mokhalil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	parss_quotes(char *str, char *tknz, t_quote *q, char token)
 void	fill_between_q(char *str, t_quote *q)
 {
 	q->ptr[q->j] = str[q->i];
+	printf("%c\n", q->ptr[q->j]);
 	q->i++;
 	q->j++;
 }

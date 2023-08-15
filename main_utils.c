@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokhalil <mokhalil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 10:26:12 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/08/13 05:45:53 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/08/14 00:46:43 by mokhalil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	int_main(t_main *main)
 	main->term2 = main->term;
 }
 
-void	int_main_before(t_main *main, envar *ev)
+void	int_main_before(t_main *main, t_envar *ev)
 {
+	(void)ev;
 	main->m->commande = return_commande(main->list, main->line, 1, 0);
 	main->m->files = return_file(main->list, main->line, 1, main->tmp);
 	main->m->next = NULL;
@@ -42,13 +43,13 @@ void	int_main_after(t_main *main)
 
 void	int_sig_main(t_main *main)
 {
-	main->term2 = main->term;
-	main->term.c_lflag &= ~ISIG;
-	main->term.c_lflag &= ~ECHOCTL;
+	tcgetattr(0, &main->term);
+	tcgetattr(0, &main->term2);
+	main->term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(0, TCSANOW, &main->term);
 }
 
-void	do_after_pipe(t_main *main, envar *ev)
+void	do_after_pipe(t_main *main, t_envar *ev)
 {
 	while (main->i < count_pipe(main->list))
 	{

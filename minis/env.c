@@ -14,11 +14,9 @@
 
 void	env(t_envar **ev)
 {
-	int		i;
 	t_envar	*pr;
 
 	pr = *ev;
-	i = 0;
 	while (pr)
 	{
 		if (strchr(pr->value, '='))

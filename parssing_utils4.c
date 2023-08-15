@@ -14,7 +14,7 @@
 
 void	init_file_parss(char *list, t_file *f, t_commandes *m, int bool)
 {
-	m->files = calloc(sizeof(char *), count_redi(list, bool) + 2);
+	m->files = my_malloc(sizeof(char *) * count_redi(list, bool) + 2);
 	f->fstart = 0;
 	f->fend = 0;
 	f->fx = 0;

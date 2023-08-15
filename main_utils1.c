@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main_utils1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iszitoun <iszitoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mokhalil <mokhalil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 10:28:40 by iszitoun          #+#    #+#             */
-/*   Updated: 2023/08/13 08:52:03 by iszitoun         ###   ########.fr       */
+/*   Updated: 2023/08/13 06:44:29 by mokhalil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "readline.h"
 
 t_global	g_g;
 
@@ -21,7 +22,7 @@ void	re_vars(t_main *main)
 	main->x = 0;
 }
 
-void	done_normal(t_commandes *tmp, t_env *senv, envar *env, t_bill *bill)
+void	done_normal(t_commandes *tmp, t_env *senv, t_envar *env, t_bill *bill)
 {
 	senv->var = fill_var(tmp, env, bill->i, bill->j);
 	senv->path = fill_path(env, senv);
@@ -39,11 +40,12 @@ void	done_normal(t_commandes *tmp, t_env *senv, envar *env, t_bill *bill)
 		return ;
 }
 
-void	check_bill(t_commandes *tmp, t_env *senv, envar *env)
+void	check_bill(t_commandes *tmp, t_env *senv, t_envar *env)
 {
 	t_bill	*bill;
 
 	bill = my_malloc(sizeof(t_bill));
+	senv = my_malloc(sizeof(t_env));
 	bill->i = 0;
 	bill->j = 0;
 	while (tmp->commande[bill->i])
